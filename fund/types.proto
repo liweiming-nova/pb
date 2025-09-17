@@ -1,0 +1,11 @@
+syntax = "proto3";
+package fund;
+option go_package = "github.com/liweiming-nova/pb/gen-go/fund";
+
+message PingReq {
+
+}
+
+message PongResp {
+  string message = 1;
+}
