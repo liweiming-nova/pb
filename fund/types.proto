@@ -1,6 +1,7 @@
 syntax = "proto3";
 package fund;
 option go_package = "github.com/liweiming-nova/pb/gen-go/fund";
+import "third_party/validate/validate.proto";
 
 message PingReq {
 
@@ -9,3 +10,48 @@ message PingReq {
 message PongResp {
   string message = 1;
 }
+
+// 创建资金账户
+message CreateAccountReq {
+  // 用户id 从用户中心获取
+  uint64 user_id = 1 [(validate.rules).uint64 = {gt: 0}];
+  // 业务类型 不同业务类型的资金不互通
+  string biz_type = 2 [(validate.rules).string.min_len = 1];
+  // 货币类型 上游服务决定 这个账户是否支持多币种
+  string currency = 3 [(validate.rules).string = {len: 3}];
+}
+// 创建资金账户
+message CreateAccountResp {
+  string fund_account_id = 1;
+  uint64 user_id = 2;
+  string status = 3;
+  // repeated 数组
+  repeated Balance balances = 4;
+}
+
+message FundAccount {
+  string fund_account_id = 1;
+  string user_name = 2;
+  string user_identifier = 3;
+  string user_open_id = 4;
+  uint64 user_id = 5;
+  string status = 6;
+}
+
+
+
+// Balance 余额
+message Balance {
+  string fund_balance_id = 1;
+  uint64 user_id = 2;
+  string biz_type = 3;
+  string currency = 4;
+  string total_amount = 5;
+  string available_amount = 6;
+  string frozen_amount = 7;
+  string pending_amount = 8;
+  string status = 9;
+  string created_at = 10;
+  FundAccount fund_account = 11;
+}
+

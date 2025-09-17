@@ -7,6 +7,7 @@
 package fund
 
 import (
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -101,14 +102,388 @@ func (x *PongResp) GetMessage() string {
 	return ""
 }
 
+// 创建资金账户
+type CreateAccountReq struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// 用户id 从用户中心获取
+	UserId uint64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	// 业务类型 不同业务类型的资金不互通
+	BizType string `protobuf:"bytes,2,opt,name=biz_type,json=bizType,proto3" json:"biz_type"`
+	// 货币类型 上游服务决定 这个账户是否支持多币种
+	Currency      string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAccountReq) Reset() {
+	*x = CreateAccountReq{}
+	mi := &file_fund_types_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAccountReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAccountReq) ProtoMessage() {}
+
+func (x *CreateAccountReq) ProtoReflect() protoreflect.Message {
+	mi := &file_fund_types_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAccountReq.ProtoReflect.Descriptor instead.
+func (*CreateAccountReq) Descriptor() ([]byte, []int) {
+	return file_fund_types_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CreateAccountReq) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateAccountReq) GetBizType() string {
+	if x != nil {
+		return x.BizType
+	}
+	return ""
+}
+
+func (x *CreateAccountReq) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+// 创建资金账户
+type CreateAccountResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FundAccountId string                 `protobuf:"bytes,1,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
+	UserId        uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status"`
+	// repeated 数组
+	Balances      []*Balance `protobuf:"bytes,4,rep,name=balances,proto3" json:"balances"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAccountResp) Reset() {
+	*x = CreateAccountResp{}
+	mi := &file_fund_types_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAccountResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAccountResp) ProtoMessage() {}
+
+func (x *CreateAccountResp) ProtoReflect() protoreflect.Message {
+	mi := &file_fund_types_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAccountResp.ProtoReflect.Descriptor instead.
+func (*CreateAccountResp) Descriptor() ([]byte, []int) {
+	return file_fund_types_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateAccountResp) GetFundAccountId() string {
+	if x != nil {
+		return x.FundAccountId
+	}
+	return ""
+}
+
+func (x *CreateAccountResp) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateAccountResp) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *CreateAccountResp) GetBalances() []*Balance {
+	if x != nil {
+		return x.Balances
+	}
+	return nil
+}
+
+type FundAccount struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	FundAccountId  string                 `protobuf:"bytes,1,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
+	UserName       string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name"`
+	UserIdentifier string                 `protobuf:"bytes,3,opt,name=user_identifier,json=userIdentifier,proto3" json:"user_identifier"`
+	UserOpenId     string                 `protobuf:"bytes,4,opt,name=user_open_id,json=userOpenId,proto3" json:"user_open_id"`
+	UserId         uint64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	Status         string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *FundAccount) Reset() {
+	*x = FundAccount{}
+	mi := &file_fund_types_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FundAccount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FundAccount) ProtoMessage() {}
+
+func (x *FundAccount) ProtoReflect() protoreflect.Message {
+	mi := &file_fund_types_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FundAccount.ProtoReflect.Descriptor instead.
+func (*FundAccount) Descriptor() ([]byte, []int) {
+	return file_fund_types_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *FundAccount) GetFundAccountId() string {
+	if x != nil {
+		return x.FundAccountId
+	}
+	return ""
+}
+
+func (x *FundAccount) GetUserName() string {
+	if x != nil {
+		return x.UserName
+	}
+	return ""
+}
+
+func (x *FundAccount) GetUserIdentifier() string {
+	if x != nil {
+		return x.UserIdentifier
+	}
+	return ""
+}
+
+func (x *FundAccount) GetUserOpenId() string {
+	if x != nil {
+		return x.UserOpenId
+	}
+	return ""
+}
+
+func (x *FundAccount) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *FundAccount) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+// Balance 余额
+type Balance struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	FundBalanceId   string                 `protobuf:"bytes,1,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	UserId          uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	BizType         string                 `protobuf:"bytes,3,opt,name=biz_type,json=bizType,proto3" json:"biz_type"`
+	Currency        string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency"`
+	TotalAmount     string                 `protobuf:"bytes,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount"`
+	AvailableAmount string                 `protobuf:"bytes,6,opt,name=available_amount,json=availableAmount,proto3" json:"available_amount"`
+	FrozenAmount    string                 `protobuf:"bytes,7,opt,name=frozen_amount,json=frozenAmount,proto3" json:"frozen_amount"`
+	PendingAmount   string                 `protobuf:"bytes,8,opt,name=pending_amount,json=pendingAmount,proto3" json:"pending_amount"`
+	Status          string                 `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
+	CreatedAt       string                 `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	FundAccount     *FundAccount           `protobuf:"bytes,11,opt,name=fund_account,json=fundAccount,proto3" json:"fund_account"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *Balance) Reset() {
+	*x = Balance{}
+	mi := &file_fund_types_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Balance) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Balance) ProtoMessage() {}
+
+func (x *Balance) ProtoReflect() protoreflect.Message {
+	mi := &file_fund_types_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Balance.ProtoReflect.Descriptor instead.
+func (*Balance) Descriptor() ([]byte, []int) {
+	return file_fund_types_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Balance) GetFundBalanceId() string {
+	if x != nil {
+		return x.FundBalanceId
+	}
+	return ""
+}
+
+func (x *Balance) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *Balance) GetBizType() string {
+	if x != nil {
+		return x.BizType
+	}
+	return ""
+}
+
+func (x *Balance) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *Balance) GetTotalAmount() string {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return ""
+}
+
+func (x *Balance) GetAvailableAmount() string {
+	if x != nil {
+		return x.AvailableAmount
+	}
+	return ""
+}
+
+func (x *Balance) GetFrozenAmount() string {
+	if x != nil {
+		return x.FrozenAmount
+	}
+	return ""
+}
+
+func (x *Balance) GetPendingAmount() string {
+	if x != nil {
+		return x.PendingAmount
+	}
+	return ""
+}
+
+func (x *Balance) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *Balance) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *Balance) GetFundAccount() *FundAccount {
+	if x != nil {
+		return x.FundAccount
+	}
+	return nil
+}
+
 var File_fund_types_proto protoreflect.FileDescriptor
 
 const file_fund_types_proto_rawDesc = "" +
 	"\n" +
-	"\x10fund/types.proto\x12\x04fund\"\t\n" +
+	"\x10fund/types.proto\x12\x04fund\x1a#third_party/validate/validate.proto\"\t\n" +
 	"\aPingReq\"$\n" +
 	"\bPongResp\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessageB*Z(github.com/liweiming-nova/pb/gen-go/fundb\x06proto3"
+	"\amessage\x18\x01 \x01(\tR\amessage\"~\n" +
+	"\x10CreateAccountReq\x12 \n" +
+	"\auser_id\x18\x01 \x01(\x04B\a\xfaB\x042\x02 \x00R\x06userId\x12\"\n" +
+	"\bbiz_type\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\abizType\x12$\n" +
+	"\bcurrency\x18\x03 \x01(\tB\b\xfaB\x05r\x03\x98\x01\x03R\bcurrency\"\x97\x01\n" +
+	"\x11CreateAccountResp\x12&\n" +
+	"\x0ffund_account_id\x18\x01 \x01(\tR\rfundAccountId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12)\n" +
+	"\bbalances\x18\x04 \x03(\v2\r.fund.BalanceR\bbalances\"\xce\x01\n" +
+	"\vFundAccount\x12&\n" +
+	"\x0ffund_account_id\x18\x01 \x01(\tR\rfundAccountId\x12\x1b\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\x12'\n" +
+	"\x0fuser_identifier\x18\x03 \x01(\tR\x0euserIdentifier\x12 \n" +
+	"\fuser_open_id\x18\x04 \x01(\tR\n" +
+	"userOpenId\x12\x17\n" +
+	"\auser_id\x18\x05 \x01(\x04R\x06userId\x12\x16\n" +
+	"\x06status\x18\x06 \x01(\tR\x06status\"\x88\x03\n" +
+	"\aBalance\x12&\n" +
+	"\x0ffund_balance_id\x18\x01 \x01(\tR\rfundBalanceId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x19\n" +
+	"\bbiz_type\x18\x03 \x01(\tR\abizType\x12\x1a\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12!\n" +
+	"\ftotal_amount\x18\x05 \x01(\tR\vtotalAmount\x12)\n" +
+	"\x10available_amount\x18\x06 \x01(\tR\x0favailableAmount\x12#\n" +
+	"\rfrozen_amount\x18\a \x01(\tR\ffrozenAmount\x12%\n" +
+	"\x0epending_amount\x18\b \x01(\tR\rpendingAmount\x12\x16\n" +
+	"\x06status\x18\t \x01(\tR\x06status\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\n" +
+	" \x01(\tR\tcreatedAt\x124\n" +
+	"\ffund_account\x18\v \x01(\v2\x11.fund.FundAccountR\vfundAccountB*Z(github.com/liweiming-nova/pb/gen-go/fundb\x06proto3"
 
 var (
 	file_fund_types_proto_rawDescOnce sync.Once
@@ -122,17 +497,23 @@ func file_fund_types_proto_rawDescGZIP() []byte {
 	return file_fund_types_proto_rawDescData
 }
 
-var file_fund_types_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_fund_types_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_fund_types_proto_goTypes = []any{
-	(*PingReq)(nil),  // 0: fund.PingReq
-	(*PongResp)(nil), // 1: fund.PongResp
+	(*PingReq)(nil),           // 0: fund.PingReq
+	(*PongResp)(nil),          // 1: fund.PongResp
+	(*CreateAccountReq)(nil),  // 2: fund.CreateAccountReq
+	(*CreateAccountResp)(nil), // 3: fund.CreateAccountResp
+	(*FundAccount)(nil),       // 4: fund.FundAccount
+	(*Balance)(nil),           // 5: fund.Balance
 }
 var file_fund_types_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	5, // 0: fund.CreateAccountResp.balances:type_name -> fund.Balance
+	4, // 1: fund.Balance.fund_account:type_name -> fund.FundAccount
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_fund_types_proto_init() }
@@ -146,7 +527,7 @@ func file_fund_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_fund_types_proto_rawDesc), len(file_fund_types_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

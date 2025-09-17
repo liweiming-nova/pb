@@ -117,3 +117,105 @@ var ChannelProxyService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "fund/services.proto",
 }
+
+const (
+	FundHubService_CreateAccount_FullMethodName = "/fund.FundHubService/CreateAccount"
+)
+
+// FundHubServiceClient is the client API for FundHubService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type FundHubServiceClient interface {
+	// 创建资金账户
+	CreateAccount(ctx context.Context, in *CreateAccountReq, opts ...grpc.CallOption) (*CreateAccountResp, error)
+}
+
+type fundHubServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFundHubServiceClient(cc grpc.ClientConnInterface) FundHubServiceClient {
+	return &fundHubServiceClient{cc}
+}
+
+func (c *fundHubServiceClient) CreateAccount(ctx context.Context, in *CreateAccountReq, opts ...grpc.CallOption) (*CreateAccountResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAccountResp)
+	err := c.cc.Invoke(ctx, FundHubService_CreateAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FundHubServiceServer is the server API for FundHubService service.
+// All implementations should embed UnimplementedFundHubServiceServer
+// for forward compatibility.
+type FundHubServiceServer interface {
+	// 创建资金账户
+	CreateAccount(context.Context, *CreateAccountReq) (*CreateAccountResp, error)
+}
+
+// UnimplementedFundHubServiceServer should be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedFundHubServiceServer struct{}
+
+func (UnimplementedFundHubServiceServer) CreateAccount(context.Context, *CreateAccountReq) (*CreateAccountResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (UnimplementedFundHubServiceServer) testEmbeddedByValue() {}
+
+// UnsafeFundHubServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FundHubServiceServer will
+// result in compilation errors.
+type UnsafeFundHubServiceServer interface {
+	mustEmbedUnimplementedFundHubServiceServer()
+}
+
+func RegisterFundHubServiceServer(s grpc.ServiceRegistrar, srv FundHubServiceServer) {
+	// If the following call pancis, it indicates UnimplementedFundHubServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&FundHubService_ServiceDesc, srv)
+}
+
+func _FundHubService_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FundHubServiceServer).CreateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FundHubService_CreateAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FundHubServiceServer).CreateAccount(ctx, req.(*CreateAccountReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// FundHubService_ServiceDesc is the grpc.ServiceDesc for FundHubService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var FundHubService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "fund.FundHubService",
+	HandlerType: (*FundHubServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateAccount",
+			Handler:    _FundHubService_CreateAccount_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "fund/services.proto",
+}

@@ -26,17 +26,23 @@ const file_fund_services_proto_rawDesc = "" +
 	"\n" +
 	"\x13fund/services.proto\x12\x04fund\x1a\x10fund/types.proto2>\n" +
 	"\x13ChannelProxyService\x12'\n" +
-	"\x04Ping\x12\r.fund.PingReq\x1a\x0e.fund.PongResp\"\x00B*Z(github.com/liweiming-nova/pb/gen-go/fundb\x06proto3"
+	"\x04Ping\x12\r.fund.PingReq\x1a\x0e.fund.PongResp\"\x002T\n" +
+	"\x0eFundHubService\x12B\n" +
+	"\rCreateAccount\x12\x16.fund.CreateAccountReq\x1a\x17.fund.CreateAccountResp\"\x00B*Z(github.com/liweiming-nova/pb/gen-go/fundb\x06proto3"
 
 var file_fund_services_proto_goTypes = []any{
-	(*PingReq)(nil),  // 0: fund.PingReq
-	(*PongResp)(nil), // 1: fund.PongResp
+	(*PingReq)(nil),           // 0: fund.PingReq
+	(*CreateAccountReq)(nil),  // 1: fund.CreateAccountReq
+	(*PongResp)(nil),          // 2: fund.PongResp
+	(*CreateAccountResp)(nil), // 3: fund.CreateAccountResp
 }
 var file_fund_services_proto_depIdxs = []int32{
 	0, // 0: fund.ChannelProxyService.Ping:input_type -> fund.PingReq
-	1, // 1: fund.ChannelProxyService.Ping:output_type -> fund.PongResp
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	1, // 1: fund.FundHubService.CreateAccount:input_type -> fund.CreateAccountReq
+	2, // 2: fund.ChannelProxyService.Ping:output_type -> fund.PongResp
+	3, // 3: fund.FundHubService.CreateAccount:output_type -> fund.CreateAccountResp
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -56,7 +62,7 @@ func file_fund_services_proto_init() {
 			NumEnums:      0,
 			NumMessages:   0,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_fund_services_proto_goTypes,
 		DependencyIndexes: file_fund_services_proto_depIdxs,

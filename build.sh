@@ -5,6 +5,7 @@ rm -rf gen-go
 mkdir -p gen-go
 
 echo "begin to generate code with buf..."
+buf dep update
 buf generate
 if [ $? -ne 0 ]; then
     echo "gen failed"

@@ -3,6 +3,7 @@ module github.com/liweiming-nova/pb
 go 1.24.7
 
 require (
+	github.com/envoyproxy/protoc-gen-validate v1.2.1
 	google.golang.org/grpc v1.75.1
 	google.golang.org/protobuf v1.36.9
 )

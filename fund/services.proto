@@ -9,3 +9,8 @@ import "fund/types.proto";
 service ChannelProxyService {
   rpc Ping(fund.PingReq) returns (fund.PongResp) {}
 }
+
+service FundHubService {
+  // 创建资金账户
+  rpc CreateAccount(fund.CreateAccountReq)  returns (fund.CreateAccountResp){}
+}
