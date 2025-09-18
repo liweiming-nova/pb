@@ -1,0 +1,10 @@
+syntax = "proto3";
+package user;
+option go_package = "github.com/liweiming-nova/pb/gen-go/user";
+import "third_party/validate/validate.proto";
+
+import "user/types.proto";
+
+service UserServer {
+  rpc GetUser(user.GetUserReq) returns(user.GetUserResp){}
+}

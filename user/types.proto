@@ -1,0 +1,25 @@
+syntax = "proto3";
+package user;
+option go_package = "github.com/liweiming-nova/pb/gen-go/user";
+import "third_party/validate/validate.proto";
+
+
+
+message User {
+  uint64 id = 1;                // 用户id
+  string name = 4;             // 用户名称
+  int32  status = 22;      // 状态
+  string email = 23;      // 邮箱
+  string phone = 24;      // 手机号
+  string created_at = 20;      // 创建时间
+  string updated_at = 21;      // 更新时间
+}
+
+message GetUserReq {
+  int64 id = 1;
+}
+
+
+message GetUserResp {
+  User user = 1;
+}
