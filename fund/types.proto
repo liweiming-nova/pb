@@ -22,7 +22,8 @@ message CreateAccountReq {
 }
 // 创建资金账户
 message CreateAccountResp {
-  string fund_account_id = 1;
+  uint64 fund_account_id = 1;
+  string fund_account_no = 5;
   uint64 user_id = 2;
   string status = 3;
   // repeated 数组
@@ -32,7 +33,7 @@ message CreateAccountResp {
 // CreateOnlineRechargeReq 创建在线充值请求
 message CreateOnlineRechargeReq {
   uint64 user_id = 1;
-  string fund_balance_id = 2;
+  uint64 fund_balance_id = 2;
   string request_id = 3  [(validate.rules).string.min_len = 1];
   string amount = 4 [(validate.rules).string.min_len = 1]; // 充值金额
   string currency = 5 [(validate.rules).string.len = 3]; // 货币类型
@@ -61,7 +62,8 @@ message CreateOfflineRechargeReq {
 
 
 message FundAccount {
-  string fund_account_id = 1;
+  uint64 fund_account_id = 1;
+  string fund_account_no = 7;
   string user_name = 2;
   string user_identifier = 3;
   string user_open_id = 4;
@@ -72,7 +74,8 @@ message FundAccount {
 
 // Balance 余额
 message Balance {
-  string fund_balance_id = 1;
+  uint64 fund_balance_id = 1;
+  string fund_balance_no = 12;
   uint64 user_id = 2;
   string biz_type = 3;
   string currency = 4;
@@ -89,8 +92,8 @@ message Balance {
 message OnlineRecharge {
   int64  id = 1;
   string out_payment_id = 2;
-  string fund_account_id = 3;
-  string fund_balance_id = 4;
+  uint64 fund_account_id = 3;
+  uint64 fund_balance_id = 4;
   uint64 user_id = 5;
   string biz_type = 6;
   string amount = 7;
@@ -122,7 +125,7 @@ message CreateDebitReq {
   string request_id = 1 [(validate.rules).string.min_len = 1];
   uint64 user_id = 2;
   string biz_type = 3;
-  string fund_balance_id = 4;
+  uint64 fund_balance_id = 4;
   string biz_no = 5 [(validate.rules).string.min_len = 1];
   string debit_type = 6 [(validate.rules).string.min_len = 1];
   string amount = 7 [(validate.rules).string.min_len = 1];
@@ -136,7 +139,7 @@ message CreateDebitReq {
 // CreateDebitResp 预扣响应
 message CreateDebitResp {
   string tx_no = 1;
-  string fund_balance_id = 2;
+  uint64 fund_balance_id = 2;
   string status = 3;
   string amount = 4;
   string currency = 5;

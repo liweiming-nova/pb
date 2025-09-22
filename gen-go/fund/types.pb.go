@@ -169,7 +169,8 @@ func (x *CreateAccountReq) GetCurrency() string {
 // 创建资金账户
 type CreateAccountResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FundAccountId string                 `protobuf:"bytes,1,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
+	FundAccountId uint64                 `protobuf:"varint,1,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
+	FundAccountNo string                 `protobuf:"bytes,5,opt,name=fund_account_no,json=fundAccountNo,proto3" json:"fund_account_no"`
 	UserId        uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id"`
 	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status"`
 	// repeated 数组
@@ -208,9 +209,16 @@ func (*CreateAccountResp) Descriptor() ([]byte, []int) {
 	return file_fund_types_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreateAccountResp) GetFundAccountId() string {
+func (x *CreateAccountResp) GetFundAccountId() uint64 {
 	if x != nil {
 		return x.FundAccountId
+	}
+	return 0
+}
+
+func (x *CreateAccountResp) GetFundAccountNo() string {
+	if x != nil {
+		return x.FundAccountNo
 	}
 	return ""
 }
@@ -240,7 +248,7 @@ func (x *CreateAccountResp) GetBalances() []*Balance {
 type CreateOnlineRechargeReq struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	UserId          uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id"`
-	FundBalanceId   string                 `protobuf:"bytes,2,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	FundBalanceId   uint64                 `protobuf:"varint,2,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
 	RequestId       string                 `protobuf:"bytes,3,opt,name=request_id,json=requestId,proto3" json:"request_id"`
 	Amount          string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount"`                                          // 充值金额
 	Currency        string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency"`                                      // 货币类型
@@ -290,11 +298,11 @@ func (x *CreateOnlineRechargeReq) GetUserId() uint64 {
 	return 0
 }
 
-func (x *CreateOnlineRechargeReq) GetFundBalanceId() string {
+func (x *CreateOnlineRechargeReq) GetFundBalanceId() uint64 {
 	if x != nil {
 		return x.FundBalanceId
 	}
-	return ""
+	return 0
 }
 
 func (x *CreateOnlineRechargeReq) GetRequestId() string {
@@ -355,7 +363,8 @@ func (x *CreateOnlineRechargeReq) GetBizType() string {
 
 type FundAccount struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	FundAccountId  string                 `protobuf:"bytes,1,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
+	FundAccountId  uint64                 `protobuf:"varint,1,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
+	FundAccountNo  string                 `protobuf:"bytes,7,opt,name=fund_account_no,json=fundAccountNo,proto3" json:"fund_account_no"`
 	UserName       string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name"`
 	UserIdentifier string                 `protobuf:"bytes,3,opt,name=user_identifier,json=userIdentifier,proto3" json:"user_identifier"`
 	UserOpenId     string                 `protobuf:"bytes,4,opt,name=user_open_id,json=userOpenId,proto3" json:"user_open_id"`
@@ -395,9 +404,16 @@ func (*FundAccount) Descriptor() ([]byte, []int) {
 	return file_fund_types_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *FundAccount) GetFundAccountId() string {
+func (x *FundAccount) GetFundAccountId() uint64 {
 	if x != nil {
 		return x.FundAccountId
+	}
+	return 0
+}
+
+func (x *FundAccount) GetFundAccountNo() string {
+	if x != nil {
+		return x.FundAccountNo
 	}
 	return ""
 }
@@ -440,7 +456,8 @@ func (x *FundAccount) GetStatus() string {
 // Balance 余额
 type Balance struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	FundBalanceId   string                 `protobuf:"bytes,1,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	FundBalanceId   uint64                 `protobuf:"varint,1,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	FundBalanceNo   string                 `protobuf:"bytes,12,opt,name=fund_balance_no,json=fundBalanceNo,proto3" json:"fund_balance_no"`
 	UserId          uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id"`
 	BizType         string                 `protobuf:"bytes,3,opt,name=biz_type,json=bizType,proto3" json:"biz_type"`
 	Currency        string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency"`
@@ -485,9 +502,16 @@ func (*Balance) Descriptor() ([]byte, []int) {
 	return file_fund_types_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *Balance) GetFundBalanceId() string {
+func (x *Balance) GetFundBalanceId() uint64 {
 	if x != nil {
 		return x.FundBalanceId
+	}
+	return 0
+}
+
+func (x *Balance) GetFundBalanceNo() string {
+	if x != nil {
+		return x.FundBalanceNo
 	}
 	return ""
 }
@@ -567,8 +591,8 @@ type OnlineRecharge struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
 	OutPaymentId   string                 `protobuf:"bytes,2,opt,name=out_payment_id,json=outPaymentId,proto3" json:"out_payment_id"`
-	FundAccountId  string                 `protobuf:"bytes,3,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
-	FundBalanceId  string                 `protobuf:"bytes,4,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	FundAccountId  uint64                 `protobuf:"varint,3,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
+	FundBalanceId  uint64                 `protobuf:"varint,4,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
 	UserId         uint64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id"`
 	BizType        string                 `protobuf:"bytes,6,opt,name=biz_type,json=bizType,proto3" json:"biz_type"`
 	Amount         string                 `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount"`
@@ -639,18 +663,18 @@ func (x *OnlineRecharge) GetOutPaymentId() string {
 	return ""
 }
 
-func (x *OnlineRecharge) GetFundAccountId() string {
+func (x *OnlineRecharge) GetFundAccountId() uint64 {
 	if x != nil {
 		return x.FundAccountId
 	}
-	return ""
+	return 0
 }
 
-func (x *OnlineRecharge) GetFundBalanceId() string {
+func (x *OnlineRecharge) GetFundBalanceId() uint64 {
 	if x != nil {
 		return x.FundBalanceId
 	}
-	return ""
+	return 0
 }
 
 func (x *OnlineRecharge) GetUserId() uint64 {
@@ -813,7 +837,7 @@ type CreateDebitReq struct {
 	RequestId      string                 `protobuf:"bytes,1,opt,name=request_id,json=requestId,proto3" json:"request_id"`
 	UserId         uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id"`
 	BizType        string                 `protobuf:"bytes,3,opt,name=biz_type,json=bizType,proto3" json:"biz_type"`
-	FundBalanceId  string                 `protobuf:"bytes,4,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	FundBalanceId  uint64                 `protobuf:"varint,4,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
 	BizNo          string                 `protobuf:"bytes,5,opt,name=biz_no,json=bizNo,proto3" json:"biz_no"`
 	DebitType      string                 `protobuf:"bytes,6,opt,name=debit_type,json=debitType,proto3" json:"debit_type"`
 	Amount         string                 `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount"`
@@ -877,11 +901,11 @@ func (x *CreateDebitReq) GetBizType() string {
 	return ""
 }
 
-func (x *CreateDebitReq) GetFundBalanceId() string {
+func (x *CreateDebitReq) GetFundBalanceId() uint64 {
 	if x != nil {
 		return x.FundBalanceId
 	}
-	return ""
+	return 0
 }
 
 func (x *CreateDebitReq) GetBizNo() string {
@@ -944,7 +968,7 @@ func (x *CreateDebitReq) GetMetadata() string {
 type CreateDebitResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TxNo          string                 `protobuf:"bytes,1,opt,name=tx_no,json=txNo,proto3" json:"tx_no"`
-	FundBalanceId string                 `protobuf:"bytes,2,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	FundBalanceId uint64                 `protobuf:"varint,2,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
 	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status"`
 	Amount        string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount"`
 	Currency      string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency"`
@@ -992,11 +1016,11 @@ func (x *CreateDebitResp) GetTxNo() string {
 	return ""
 }
 
-func (x *CreateDebitResp) GetFundBalanceId() string {
+func (x *CreateDebitResp) GetFundBalanceId() uint64 {
 	if x != nil {
 		return x.FundBalanceId
 	}
-	return ""
+	return 0
 }
 
 func (x *CreateDebitResp) GetStatus() string {
@@ -1052,15 +1076,16 @@ const file_fund_types_proto_rawDesc = "" +
 	"\x10CreateAccountReq\x12 \n" +
 	"\auser_id\x18\x01 \x01(\x04B\a\xfaB\x042\x02 \x00R\x06userId\x12\"\n" +
 	"\bbiz_type\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\abizType\x12$\n" +
-	"\bcurrency\x18\x03 \x01(\tB\b\xfaB\x05r\x03\x98\x01\x03R\bcurrency\"\x97\x01\n" +
+	"\bcurrency\x18\x03 \x01(\tB\b\xfaB\x05r\x03\x98\x01\x03R\bcurrency\"\xbf\x01\n" +
 	"\x11CreateAccountResp\x12&\n" +
-	"\x0ffund_account_id\x18\x01 \x01(\tR\rfundAccountId\x12\x17\n" +
+	"\x0ffund_account_id\x18\x01 \x01(\x04R\rfundAccountId\x12&\n" +
+	"\x0ffund_account_no\x18\x05 \x01(\tR\rfundAccountNo\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12)\n" +
 	"\bbalances\x18\x04 \x03(\v2\r.fund.BalanceR\bbalances\"\x8e\x03\n" +
 	"\x17CreateOnlineRechargeReq\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12&\n" +
-	"\x0ffund_balance_id\x18\x02 \x01(\tR\rfundBalanceId\x12&\n" +
+	"\x0ffund_balance_id\x18\x02 \x01(\x04R\rfundBalanceId\x12&\n" +
 	"\n" +
 	"request_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\trequestId\x12\x1f\n" +
 	"\x06amount\x18\x04 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06amount\x12$\n" +
@@ -1071,17 +1096,19 @@ const file_fund_types_proto_rawDesc = "" +
 	"\x0fsource_operator\x18\b \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0esourceOperator\x12\x1a\n" +
 	"\bmetadata\x18\t \x01(\tR\bmetadata\x12\x19\n" +
 	"\bbiz_type\x18\n" +
-	" \x01(\tR\abizType\"\xce\x01\n" +
+	" \x01(\tR\abizType\"\xf6\x01\n" +
 	"\vFundAccount\x12&\n" +
-	"\x0ffund_account_id\x18\x01 \x01(\tR\rfundAccountId\x12\x1b\n" +
+	"\x0ffund_account_id\x18\x01 \x01(\x04R\rfundAccountId\x12&\n" +
+	"\x0ffund_account_no\x18\a \x01(\tR\rfundAccountNo\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12'\n" +
 	"\x0fuser_identifier\x18\x03 \x01(\tR\x0euserIdentifier\x12 \n" +
 	"\fuser_open_id\x18\x04 \x01(\tR\n" +
 	"userOpenId\x12\x17\n" +
 	"\auser_id\x18\x05 \x01(\x04R\x06userId\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\tR\x06status\"\x88\x03\n" +
+	"\x06status\x18\x06 \x01(\tR\x06status\"\xb0\x03\n" +
 	"\aBalance\x12&\n" +
-	"\x0ffund_balance_id\x18\x01 \x01(\tR\rfundBalanceId\x12\x17\n" +
+	"\x0ffund_balance_id\x18\x01 \x01(\x04R\rfundBalanceId\x12&\n" +
+	"\x0ffund_balance_no\x18\f \x01(\tR\rfundBalanceNo\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x19\n" +
 	"\bbiz_type\x18\x03 \x01(\tR\abizType\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12!\n" +
@@ -1097,8 +1124,8 @@ const file_fund_types_proto_rawDesc = "" +
 	"\x0eOnlineRecharge\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12$\n" +
 	"\x0eout_payment_id\x18\x02 \x01(\tR\foutPaymentId\x12&\n" +
-	"\x0ffund_account_id\x18\x03 \x01(\tR\rfundAccountId\x12&\n" +
-	"\x0ffund_balance_id\x18\x04 \x01(\tR\rfundBalanceId\x12\x17\n" +
+	"\x0ffund_account_id\x18\x03 \x01(\x04R\rfundAccountId\x12&\n" +
+	"\x0ffund_balance_id\x18\x04 \x01(\x04R\rfundBalanceId\x12\x17\n" +
 	"\auser_id\x18\x05 \x01(\x04R\x06userId\x12\x19\n" +
 	"\bbiz_type\x18\x06 \x01(\tR\abizType\x12\x16\n" +
 	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1a\n" +
@@ -1132,7 +1159,7 @@ const file_fund_types_proto_rawDesc = "" +
 	"request_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\trequestId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x19\n" +
 	"\bbiz_type\x18\x03 \x01(\tR\abizType\x12&\n" +
-	"\x0ffund_balance_id\x18\x04 \x01(\tR\rfundBalanceId\x12\x1e\n" +
+	"\x0ffund_balance_id\x18\x04 \x01(\x04R\rfundBalanceId\x12\x1e\n" +
 	"\x06biz_no\x18\x05 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x05bizNo\x12&\n" +
 	"\n" +
 	"debit_type\x18\x06 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\tdebitType\x12\x1f\n" +
@@ -1145,7 +1172,7 @@ const file_fund_types_proto_rawDesc = "" +
 	"\bmetadata\x18\f \x01(\tR\bmetadata\"\xf1\x01\n" +
 	"\x0fCreateDebitResp\x12\x13\n" +
 	"\x05tx_no\x18\x01 \x01(\tR\x04txNo\x12&\n" +
-	"\x0ffund_balance_id\x18\x02 \x01(\tR\rfundBalanceId\x12\x16\n" +
+	"\x0ffund_balance_id\x18\x02 \x01(\x04R\rfundBalanceId\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12\x16\n" +
 	"\x06amount\x18\x04 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x1f\n" +

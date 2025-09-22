@@ -392,6 +392,8 @@ func (m *CreateAccountResp) validate(all bool) error {
 
 	// no validation rules for FundAccountId
 
+	// no validation rules for FundAccountNo
+
 	// no validation rules for UserId
 
 	// no validation rules for Status
@@ -711,6 +713,8 @@ func (m *FundAccount) validate(all bool) error {
 
 	// no validation rules for FundAccountId
 
+	// no validation rules for FundAccountNo
+
 	// no validation rules for UserName
 
 	// no validation rules for UserIdentifier
@@ -820,6 +824,8 @@ func (m *Balance) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for FundBalanceId
+
+	// no validation rules for FundBalanceNo
 
 	// no validation rules for UserId
 
