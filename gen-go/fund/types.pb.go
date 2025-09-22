@@ -236,6 +236,123 @@ func (x *CreateAccountResp) GetBalances() []*Balance {
 	return nil
 }
 
+// CreateOnlineRechargeReq 创建在线充值请求
+type CreateOnlineRechargeReq struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	UserId          uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	FundBalanceId   string                 `protobuf:"bytes,2,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	RequestId       string                 `protobuf:"bytes,3,opt,name=request_id,json=requestId,proto3" json:"request_id"`
+	Amount          string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount"`                                          // 充值金额
+	Currency        string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency"`                                      // 货币类型
+	RechargeChannel string                 `protobuf:"bytes,6,opt,name=recharge_channel,json=rechargeChannel,proto3" json:"recharge_channel"` // 充值渠道
+	ReturnUrl       string                 `protobuf:"bytes,7,opt,name=return_url,json=returnUrl,proto3" json:"return_url"`                   // 支付完成跳转URL
+	SourceOperator  string                 `protobuf:"bytes,8,opt,name=source_operator,json=sourceOperator,proto3" json:"source_operator"`
+	Metadata        string                 `protobuf:"bytes,9,opt,name=metadata,proto3" json:"metadata"`               // 元数据
+	BizType         string                 `protobuf:"bytes,10,opt,name=biz_type,json=bizType,proto3" json:"biz_type"` // 业务类型
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *CreateOnlineRechargeReq) Reset() {
+	*x = CreateOnlineRechargeReq{}
+	mi := &file_fund_types_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOnlineRechargeReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOnlineRechargeReq) ProtoMessage() {}
+
+func (x *CreateOnlineRechargeReq) ProtoReflect() protoreflect.Message {
+	mi := &file_fund_types_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOnlineRechargeReq.ProtoReflect.Descriptor instead.
+func (*CreateOnlineRechargeReq) Descriptor() ([]byte, []int) {
+	return file_fund_types_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateOnlineRechargeReq) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateOnlineRechargeReq) GetFundBalanceId() string {
+	if x != nil {
+		return x.FundBalanceId
+	}
+	return ""
+}
+
+func (x *CreateOnlineRechargeReq) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *CreateOnlineRechargeReq) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *CreateOnlineRechargeReq) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *CreateOnlineRechargeReq) GetRechargeChannel() string {
+	if x != nil {
+		return x.RechargeChannel
+	}
+	return ""
+}
+
+func (x *CreateOnlineRechargeReq) GetReturnUrl() string {
+	if x != nil {
+		return x.ReturnUrl
+	}
+	return ""
+}
+
+func (x *CreateOnlineRechargeReq) GetSourceOperator() string {
+	if x != nil {
+		return x.SourceOperator
+	}
+	return ""
+}
+
+func (x *CreateOnlineRechargeReq) GetMetadata() string {
+	if x != nil {
+		return x.Metadata
+	}
+	return ""
+}
+
+func (x *CreateOnlineRechargeReq) GetBizType() string {
+	if x != nil {
+		return x.BizType
+	}
+	return ""
+}
+
 type FundAccount struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	FundAccountId  string                 `protobuf:"bytes,1,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
@@ -250,7 +367,7 @@ type FundAccount struct {
 
 func (x *FundAccount) Reset() {
 	*x = FundAccount{}
-	mi := &file_fund_types_proto_msgTypes[4]
+	mi := &file_fund_types_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -262,7 +379,7 @@ func (x *FundAccount) String() string {
 func (*FundAccount) ProtoMessage() {}
 
 func (x *FundAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_fund_types_proto_msgTypes[4]
+	mi := &file_fund_types_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -275,7 +392,7 @@ func (x *FundAccount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FundAccount.ProtoReflect.Descriptor instead.
 func (*FundAccount) Descriptor() ([]byte, []int) {
-	return file_fund_types_proto_rawDescGZIP(), []int{4}
+	return file_fund_types_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *FundAccount) GetFundAccountId() string {
@@ -340,7 +457,7 @@ type Balance struct {
 
 func (x *Balance) Reset() {
 	*x = Balance{}
-	mi := &file_fund_types_proto_msgTypes[5]
+	mi := &file_fund_types_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -352,7 +469,7 @@ func (x *Balance) String() string {
 func (*Balance) ProtoMessage() {}
 
 func (x *Balance) ProtoReflect() protoreflect.Message {
-	mi := &file_fund_types_proto_msgTypes[5]
+	mi := &file_fund_types_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -365,7 +482,7 @@ func (x *Balance) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Balance.ProtoReflect.Descriptor instead.
 func (*Balance) Descriptor() ([]byte, []int) {
-	return file_fund_types_proto_rawDescGZIP(), []int{5}
+	return file_fund_types_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Balance) GetFundBalanceId() string {
@@ -445,6 +562,485 @@ func (x *Balance) GetFundAccount() *FundAccount {
 	return nil
 }
 
+// OnlineRecharge 在线充值
+type OnlineRecharge struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	OutPaymentId   string                 `protobuf:"bytes,2,opt,name=out_payment_id,json=outPaymentId,proto3" json:"out_payment_id"`
+	FundAccountId  string                 `protobuf:"bytes,3,opt,name=fund_account_id,json=fundAccountId,proto3" json:"fund_account_id"`
+	FundBalanceId  string                 `protobuf:"bytes,4,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	UserId         uint64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	BizType        string                 `protobuf:"bytes,6,opt,name=biz_type,json=bizType,proto3" json:"biz_type"`
+	Amount         string                 `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount"`
+	Currency       string                 `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency"`
+	Channel        string                 `protobuf:"bytes,9,opt,name=channel,proto3" json:"channel"`
+	Status         string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status"`
+	PaymentStatus  string                 `protobuf:"bytes,11,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status"`
+	ChannelOrderId string                 `protobuf:"bytes,12,opt,name=channel_order_id,json=channelOrderId,proto3" json:"channel_order_id"`
+	ChannelTradeId string                 `protobuf:"bytes,13,opt,name=channel_trade_id,json=channelTradeId,proto3" json:"channel_trade_id"`
+	ChannelRetCode string                 `protobuf:"bytes,14,opt,name=channel_ret_code,json=channelRetCode,proto3" json:"channel_ret_code"`
+	ChannelRetMsg  string                 `protobuf:"bytes,15,opt,name=channel_ret_msg,json=channelRetMsg,proto3" json:"channel_ret_msg"`
+	SourceOperator string                 `protobuf:"bytes,16,opt,name=source_operator,json=sourceOperator,proto3" json:"source_operator"`
+	Metadata       string                 `protobuf:"bytes,17,opt,name=metadata,proto3" json:"metadata"`
+	CompletedTime  string                 `protobuf:"bytes,18,opt,name=completed_time,json=completedTime,proto3" json:"completed_time"`
+	CreatedAt      string                 `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	PaymentAmount  string                 `protobuf:"bytes,20,opt,name=payment_amount,json=paymentAmount,proto3" json:"payment_amount"`
+	PaymentUrl     string                 `protobuf:"bytes,21,opt,name=payment_url,json=paymentUrl,proto3" json:"payment_url"`
+	SysRetCode     string                 `protobuf:"bytes,22,opt,name=sys_ret_code,json=sysRetCode,proto3" json:"sys_ret_code"`
+	SysRetMsg      string                 `protobuf:"bytes,23,opt,name=sys_ret_msg,json=sysRetMsg,proto3" json:"sys_ret_msg"`
+	NetAmount      string                 `protobuf:"bytes,24,opt,name=net_amount,json=netAmount,proto3" json:"net_amount"`
+	PaymentFee     string                 `protobuf:"bytes,25,opt,name=payment_fee,json=paymentFee,proto3" json:"payment_fee"`
+	RechargeAmount string                 `protobuf:"bytes,26,opt,name=recharge_amount,json=rechargeAmount,proto3" json:"recharge_amount"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *OnlineRecharge) Reset() {
+	*x = OnlineRecharge{}
+	mi := &file_fund_types_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OnlineRecharge) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OnlineRecharge) ProtoMessage() {}
+
+func (x *OnlineRecharge) ProtoReflect() protoreflect.Message {
+	mi := &file_fund_types_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OnlineRecharge.ProtoReflect.Descriptor instead.
+func (*OnlineRecharge) Descriptor() ([]byte, []int) {
+	return file_fund_types_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *OnlineRecharge) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *OnlineRecharge) GetOutPaymentId() string {
+	if x != nil {
+		return x.OutPaymentId
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetFundAccountId() string {
+	if x != nil {
+		return x.FundAccountId
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetFundBalanceId() string {
+	if x != nil {
+		return x.FundBalanceId
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *OnlineRecharge) GetBizType() string {
+	if x != nil {
+		return x.BizType
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetChannel() string {
+	if x != nil {
+		return x.Channel
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetPaymentStatus() string {
+	if x != nil {
+		return x.PaymentStatus
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetChannelOrderId() string {
+	if x != nil {
+		return x.ChannelOrderId
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetChannelTradeId() string {
+	if x != nil {
+		return x.ChannelTradeId
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetChannelRetCode() string {
+	if x != nil {
+		return x.ChannelRetCode
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetChannelRetMsg() string {
+	if x != nil {
+		return x.ChannelRetMsg
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetSourceOperator() string {
+	if x != nil {
+		return x.SourceOperator
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetMetadata() string {
+	if x != nil {
+		return x.Metadata
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetCompletedTime() string {
+	if x != nil {
+		return x.CompletedTime
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetPaymentAmount() string {
+	if x != nil {
+		return x.PaymentAmount
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetPaymentUrl() string {
+	if x != nil {
+		return x.PaymentUrl
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetSysRetCode() string {
+	if x != nil {
+		return x.SysRetCode
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetSysRetMsg() string {
+	if x != nil {
+		return x.SysRetMsg
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetNetAmount() string {
+	if x != nil {
+		return x.NetAmount
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetPaymentFee() string {
+	if x != nil {
+		return x.PaymentFee
+	}
+	return ""
+}
+
+func (x *OnlineRecharge) GetRechargeAmount() string {
+	if x != nil {
+		return x.RechargeAmount
+	}
+	return ""
+}
+
+// CreateDebitReq 预扣请求
+type CreateDebitReq struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	RequestId      string                 `protobuf:"bytes,1,opt,name=request_id,json=requestId,proto3" json:"request_id"`
+	UserId         uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	BizType        string                 `protobuf:"bytes,3,opt,name=biz_type,json=bizType,proto3" json:"biz_type"`
+	FundBalanceId  string                 `protobuf:"bytes,4,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	BizNo          string                 `protobuf:"bytes,5,opt,name=biz_no,json=bizNo,proto3" json:"biz_no"`
+	DebitType      string                 `protobuf:"bytes,6,opt,name=debit_type,json=debitType,proto3" json:"debit_type"`
+	Amount         string                 `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount"`
+	Currency       string                 `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency"`
+	ExpireMinutes  uint64                 `protobuf:"varint,9,opt,name=expire_minutes,json=expireMinutes,proto3" json:"expire_minutes"`
+	SourceOperator string                 `protobuf:"bytes,10,opt,name=source_operator,json=sourceOperator,proto3" json:"source_operator"`
+	Summary        string                 `protobuf:"bytes,11,opt,name=summary,proto3" json:"summary"`
+	Metadata       string                 `protobuf:"bytes,12,opt,name=metadata,proto3" json:"metadata"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CreateDebitReq) Reset() {
+	*x = CreateDebitReq{}
+	mi := &file_fund_types_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateDebitReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateDebitReq) ProtoMessage() {}
+
+func (x *CreateDebitReq) ProtoReflect() protoreflect.Message {
+	mi := &file_fund_types_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateDebitReq.ProtoReflect.Descriptor instead.
+func (*CreateDebitReq) Descriptor() ([]byte, []int) {
+	return file_fund_types_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *CreateDebitReq) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *CreateDebitReq) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateDebitReq) GetBizType() string {
+	if x != nil {
+		return x.BizType
+	}
+	return ""
+}
+
+func (x *CreateDebitReq) GetFundBalanceId() string {
+	if x != nil {
+		return x.FundBalanceId
+	}
+	return ""
+}
+
+func (x *CreateDebitReq) GetBizNo() string {
+	if x != nil {
+		return x.BizNo
+	}
+	return ""
+}
+
+func (x *CreateDebitReq) GetDebitType() string {
+	if x != nil {
+		return x.DebitType
+	}
+	return ""
+}
+
+func (x *CreateDebitReq) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *CreateDebitReq) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *CreateDebitReq) GetExpireMinutes() uint64 {
+	if x != nil {
+		return x.ExpireMinutes
+	}
+	return 0
+}
+
+func (x *CreateDebitReq) GetSourceOperator() string {
+	if x != nil {
+		return x.SourceOperator
+	}
+	return ""
+}
+
+func (x *CreateDebitReq) GetSummary() string {
+	if x != nil {
+		return x.Summary
+	}
+	return ""
+}
+
+func (x *CreateDebitReq) GetMetadata() string {
+	if x != nil {
+		return x.Metadata
+	}
+	return ""
+}
+
+// CreateDebitResp 预扣响应
+type CreateDebitResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TxNo          string                 `protobuf:"bytes,1,opt,name=tx_no,json=txNo,proto3" json:"tx_no"`
+	FundBalanceId string                 `protobuf:"bytes,2,opt,name=fund_balance_id,json=fundBalanceId,proto3" json:"fund_balance_id"`
+	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status"`
+	Amount        string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount"`
+	Currency      string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency"`
+	FailReason    string                 `protobuf:"bytes,6,opt,name=fail_reason,json=failReason,proto3" json:"fail_reason"`
+	RequestId     string                 `protobuf:"bytes,7,opt,name=request_id,json=requestId,proto3" json:"request_id"`
+	BizNo         string                 `protobuf:"bytes,8,opt,name=biz_no,json=bizNo,proto3" json:"biz_no"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateDebitResp) Reset() {
+	*x = CreateDebitResp{}
+	mi := &file_fund_types_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateDebitResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateDebitResp) ProtoMessage() {}
+
+func (x *CreateDebitResp) ProtoReflect() protoreflect.Message {
+	mi := &file_fund_types_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateDebitResp.ProtoReflect.Descriptor instead.
+func (*CreateDebitResp) Descriptor() ([]byte, []int) {
+	return file_fund_types_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *CreateDebitResp) GetTxNo() string {
+	if x != nil {
+		return x.TxNo
+	}
+	return ""
+}
+
+func (x *CreateDebitResp) GetFundBalanceId() string {
+	if x != nil {
+		return x.FundBalanceId
+	}
+	return ""
+}
+
+func (x *CreateDebitResp) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *CreateDebitResp) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *CreateDebitResp) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *CreateDebitResp) GetFailReason() string {
+	if x != nil {
+		return x.FailReason
+	}
+	return ""
+}
+
+func (x *CreateDebitResp) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *CreateDebitResp) GetBizNo() string {
+	if x != nil {
+		return x.BizNo
+	}
+	return ""
+}
+
 var File_fund_types_proto protoreflect.FileDescriptor
 
 const file_fund_types_proto_rawDesc = "" +
@@ -461,7 +1057,21 @@ const file_fund_types_proto_rawDesc = "" +
 	"\x0ffund_account_id\x18\x01 \x01(\tR\rfundAccountId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12)\n" +
-	"\bbalances\x18\x04 \x03(\v2\r.fund.BalanceR\bbalances\"\xce\x01\n" +
+	"\bbalances\x18\x04 \x03(\v2\r.fund.BalanceR\bbalances\"\x8e\x03\n" +
+	"\x17CreateOnlineRechargeReq\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12&\n" +
+	"\x0ffund_balance_id\x18\x02 \x01(\tR\rfundBalanceId\x12&\n" +
+	"\n" +
+	"request_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\trequestId\x12\x1f\n" +
+	"\x06amount\x18\x04 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06amount\x12$\n" +
+	"\bcurrency\x18\x05 \x01(\tB\b\xfaB\x05r\x03\x98\x01\x03R\bcurrency\x122\n" +
+	"\x10recharge_channel\x18\x06 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0frechargeChannel\x12&\n" +
+	"\n" +
+	"return_url\x18\a \x01(\tB\a\xfaB\x04r\x02\x10\x01R\treturnUrl\x120\n" +
+	"\x0fsource_operator\x18\b \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0esourceOperator\x12\x1a\n" +
+	"\bmetadata\x18\t \x01(\tR\bmetadata\x12\x19\n" +
+	"\bbiz_type\x18\n" +
+	" \x01(\tR\abizType\"\xce\x01\n" +
 	"\vFundAccount\x12&\n" +
 	"\x0ffund_account_id\x18\x01 \x01(\tR\rfundAccountId\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12'\n" +
@@ -483,7 +1093,67 @@ const file_fund_types_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\n" +
 	" \x01(\tR\tcreatedAt\x124\n" +
-	"\ffund_account\x18\v \x01(\v2\x11.fund.FundAccountR\vfundAccountB*Z(github.com/liweiming-nova/pb/gen-go/fundb\x06proto3"
+	"\ffund_account\x18\v \x01(\v2\x11.fund.FundAccountR\vfundAccount\"\xfb\x06\n" +
+	"\x0eOnlineRecharge\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12$\n" +
+	"\x0eout_payment_id\x18\x02 \x01(\tR\foutPaymentId\x12&\n" +
+	"\x0ffund_account_id\x18\x03 \x01(\tR\rfundAccountId\x12&\n" +
+	"\x0ffund_balance_id\x18\x04 \x01(\tR\rfundBalanceId\x12\x17\n" +
+	"\auser_id\x18\x05 \x01(\x04R\x06userId\x12\x19\n" +
+	"\bbiz_type\x18\x06 \x01(\tR\abizType\x12\x16\n" +
+	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1a\n" +
+	"\bcurrency\x18\b \x01(\tR\bcurrency\x12\x18\n" +
+	"\achannel\x18\t \x01(\tR\achannel\x12\x16\n" +
+	"\x06status\x18\n" +
+	" \x01(\tR\x06status\x12%\n" +
+	"\x0epayment_status\x18\v \x01(\tR\rpaymentStatus\x12(\n" +
+	"\x10channel_order_id\x18\f \x01(\tR\x0echannelOrderId\x12(\n" +
+	"\x10channel_trade_id\x18\r \x01(\tR\x0echannelTradeId\x12(\n" +
+	"\x10channel_ret_code\x18\x0e \x01(\tR\x0echannelRetCode\x12&\n" +
+	"\x0fchannel_ret_msg\x18\x0f \x01(\tR\rchannelRetMsg\x12'\n" +
+	"\x0fsource_operator\x18\x10 \x01(\tR\x0esourceOperator\x12\x1a\n" +
+	"\bmetadata\x18\x11 \x01(\tR\bmetadata\x12%\n" +
+	"\x0ecompleted_time\x18\x12 \x01(\tR\rcompletedTime\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x13 \x01(\tR\tcreatedAt\x12%\n" +
+	"\x0epayment_amount\x18\x14 \x01(\tR\rpaymentAmount\x12\x1f\n" +
+	"\vpayment_url\x18\x15 \x01(\tR\n" +
+	"paymentUrl\x12 \n" +
+	"\fsys_ret_code\x18\x16 \x01(\tR\n" +
+	"sysRetCode\x12\x1e\n" +
+	"\vsys_ret_msg\x18\x17 \x01(\tR\tsysRetMsg\x12\x1d\n" +
+	"\n" +
+	"net_amount\x18\x18 \x01(\tR\tnetAmount\x12\x1f\n" +
+	"\vpayment_fee\x18\x19 \x01(\tR\n" +
+	"paymentFee\x12'\n" +
+	"\x0frecharge_amount\x18\x1a \x01(\tR\x0erechargeAmount\"\xb2\x03\n" +
+	"\x0eCreateDebitReq\x12&\n" +
+	"\n" +
+	"request_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\trequestId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x19\n" +
+	"\bbiz_type\x18\x03 \x01(\tR\abizType\x12&\n" +
+	"\x0ffund_balance_id\x18\x04 \x01(\tR\rfundBalanceId\x12\x1e\n" +
+	"\x06biz_no\x18\x05 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x05bizNo\x12&\n" +
+	"\n" +
+	"debit_type\x18\x06 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\tdebitType\x12\x1f\n" +
+	"\x06amount\x18\a \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06amount\x12$\n" +
+	"\bcurrency\x18\b \x01(\tB\b\xfaB\x05r\x03\x98\x01\x03R\bcurrency\x12%\n" +
+	"\x0eexpire_minutes\x18\t \x01(\x04R\rexpireMinutes\x120\n" +
+	"\x0fsource_operator\x18\n" +
+	" \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0esourceOperator\x12\x18\n" +
+	"\asummary\x18\v \x01(\tR\asummary\x12\x1a\n" +
+	"\bmetadata\x18\f \x01(\tR\bmetadata\"\xf1\x01\n" +
+	"\x0fCreateDebitResp\x12\x13\n" +
+	"\x05tx_no\x18\x01 \x01(\tR\x04txNo\x12&\n" +
+	"\x0ffund_balance_id\x18\x02 \x01(\tR\rfundBalanceId\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\tR\x06amount\x12\x1a\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x1f\n" +
+	"\vfail_reason\x18\x06 \x01(\tR\n" +
+	"failReason\x12\x1d\n" +
+	"\n" +
+	"request_id\x18\a \x01(\tR\trequestId\x12\x15\n" +
+	"\x06biz_no\x18\b \x01(\tR\x05bizNoB*Z(github.com/liweiming-nova/pb/gen-go/fundb\x06proto3"
 
 var (
 	file_fund_types_proto_rawDescOnce sync.Once
@@ -497,18 +1167,22 @@ func file_fund_types_proto_rawDescGZIP() []byte {
 	return file_fund_types_proto_rawDescData
 }
 
-var file_fund_types_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_fund_types_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_fund_types_proto_goTypes = []any{
-	(*PingReq)(nil),           // 0: fund.PingReq
-	(*PongResp)(nil),          // 1: fund.PongResp
-	(*CreateAccountReq)(nil),  // 2: fund.CreateAccountReq
-	(*CreateAccountResp)(nil), // 3: fund.CreateAccountResp
-	(*FundAccount)(nil),       // 4: fund.FundAccount
-	(*Balance)(nil),           // 5: fund.Balance
+	(*PingReq)(nil),                 // 0: fund.PingReq
+	(*PongResp)(nil),                // 1: fund.PongResp
+	(*CreateAccountReq)(nil),        // 2: fund.CreateAccountReq
+	(*CreateAccountResp)(nil),       // 3: fund.CreateAccountResp
+	(*CreateOnlineRechargeReq)(nil), // 4: fund.CreateOnlineRechargeReq
+	(*FundAccount)(nil),             // 5: fund.FundAccount
+	(*Balance)(nil),                 // 6: fund.Balance
+	(*OnlineRecharge)(nil),          // 7: fund.OnlineRecharge
+	(*CreateDebitReq)(nil),          // 8: fund.CreateDebitReq
+	(*CreateDebitResp)(nil),         // 9: fund.CreateDebitResp
 }
 var file_fund_types_proto_depIdxs = []int32{
-	5, // 0: fund.CreateAccountResp.balances:type_name -> fund.Balance
-	4, // 1: fund.Balance.fund_account:type_name -> fund.FundAccount
+	6, // 0: fund.CreateAccountResp.balances:type_name -> fund.Balance
+	5, // 1: fund.Balance.fund_account:type_name -> fund.FundAccount
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -527,7 +1201,7 @@ func file_fund_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_fund_types_proto_rawDesc), len(file_fund_types_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

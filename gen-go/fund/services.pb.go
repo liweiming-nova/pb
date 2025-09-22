@@ -26,23 +26,33 @@ const file_fund_services_proto_rawDesc = "" +
 	"\n" +
 	"\x13fund/services.proto\x12\x04fund\x1a\x10fund/types.proto2>\n" +
 	"\x13ChannelProxyService\x12'\n" +
-	"\x04Ping\x12\r.fund.PingReq\x1a\x0e.fund.PongResp\"\x002T\n" +
+	"\x04Ping\x12\r.fund.PingReq\x1a\x0e.fund.PongResp\"\x002\xe1\x01\n" +
 	"\x0eFundHubService\x12B\n" +
-	"\rCreateAccount\x12\x16.fund.CreateAccountReq\x1a\x17.fund.CreateAccountResp\"\x00B*Z(github.com/liweiming-nova/pb/gen-go/fundb\x06proto3"
+	"\rCreateAccount\x12\x16.fund.CreateAccountReq\x1a\x17.fund.CreateAccountResp\"\x00\x12M\n" +
+	"\x14CreateOnlineRecharge\x12\x1d.fund.CreateOnlineRechargeReq\x1a\x14.fund.OnlineRecharge\"\x00\x12<\n" +
+	"\vCreateDebit\x12\x14.fund.CreateDebitReq\x1a\x15.fund.CreateDebitResp\"\x00B*Z(github.com/liweiming-nova/pb/gen-go/fundb\x06proto3"
 
 var file_fund_services_proto_goTypes = []any{
-	(*PingReq)(nil),           // 0: fund.PingReq
-	(*CreateAccountReq)(nil),  // 1: fund.CreateAccountReq
-	(*PongResp)(nil),          // 2: fund.PongResp
-	(*CreateAccountResp)(nil), // 3: fund.CreateAccountResp
+	(*PingReq)(nil),                 // 0: fund.PingReq
+	(*CreateAccountReq)(nil),        // 1: fund.CreateAccountReq
+	(*CreateOnlineRechargeReq)(nil), // 2: fund.CreateOnlineRechargeReq
+	(*CreateDebitReq)(nil),          // 3: fund.CreateDebitReq
+	(*PongResp)(nil),                // 4: fund.PongResp
+	(*CreateAccountResp)(nil),       // 5: fund.CreateAccountResp
+	(*OnlineRecharge)(nil),          // 6: fund.OnlineRecharge
+	(*CreateDebitResp)(nil),         // 7: fund.CreateDebitResp
 }
 var file_fund_services_proto_depIdxs = []int32{
 	0, // 0: fund.ChannelProxyService.Ping:input_type -> fund.PingReq
 	1, // 1: fund.FundHubService.CreateAccount:input_type -> fund.CreateAccountReq
-	2, // 2: fund.ChannelProxyService.Ping:output_type -> fund.PongResp
-	3, // 3: fund.FundHubService.CreateAccount:output_type -> fund.CreateAccountResp
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	2, // 2: fund.FundHubService.CreateOnlineRecharge:input_type -> fund.CreateOnlineRechargeReq
+	3, // 3: fund.FundHubService.CreateDebit:input_type -> fund.CreateDebitReq
+	4, // 4: fund.ChannelProxyService.Ping:output_type -> fund.PongResp
+	5, // 5: fund.FundHubService.CreateAccount:output_type -> fund.CreateAccountResp
+	6, // 6: fund.FundHubService.CreateOnlineRecharge:output_type -> fund.OnlineRecharge
+	7, // 7: fund.FundHubService.CreateDebit:output_type -> fund.CreateDebitResp
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

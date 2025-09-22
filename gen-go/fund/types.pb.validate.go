@@ -510,6 +510,183 @@ var _ interface {
 	ErrorName() string
 } = CreateAccountRespValidationError{}
 
+// Validate checks the field values on CreateOnlineRechargeReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateOnlineRechargeReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateOnlineRechargeReq with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateOnlineRechargeReqMultiError, or nil if none found.
+func (m *CreateOnlineRechargeReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateOnlineRechargeReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for FundBalanceId
+
+	if utf8.RuneCountInString(m.GetRequestId()) < 1 {
+		err := CreateOnlineRechargeReqValidationError{
+			field:  "RequestId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetAmount()) < 1 {
+		err := CreateOnlineRechargeReqValidationError{
+			field:  "Amount",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetCurrency()) != 3 {
+		err := CreateOnlineRechargeReqValidationError{
+			field:  "Currency",
+			reason: "value length must be 3 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	if utf8.RuneCountInString(m.GetRechargeChannel()) < 1 {
+		err := CreateOnlineRechargeReqValidationError{
+			field:  "RechargeChannel",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetReturnUrl()) < 1 {
+		err := CreateOnlineRechargeReqValidationError{
+			field:  "ReturnUrl",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetSourceOperator()) < 1 {
+		err := CreateOnlineRechargeReqValidationError{
+			field:  "SourceOperator",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Metadata
+
+	// no validation rules for BizType
+
+	if len(errors) > 0 {
+		return CreateOnlineRechargeReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateOnlineRechargeReqMultiError is an error wrapping multiple validation
+// errors returned by CreateOnlineRechargeReq.ValidateAll() if the designated
+// constraints aren't met.
+type CreateOnlineRechargeReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateOnlineRechargeReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateOnlineRechargeReqMultiError) AllErrors() []error { return m }
+
+// CreateOnlineRechargeReqValidationError is the validation error returned by
+// CreateOnlineRechargeReq.Validate if the designated constraints aren't met.
+type CreateOnlineRechargeReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateOnlineRechargeReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateOnlineRechargeReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateOnlineRechargeReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateOnlineRechargeReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateOnlineRechargeReqValidationError) ErrorName() string {
+	return "CreateOnlineRechargeReqValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateOnlineRechargeReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateOnlineRechargeReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateOnlineRechargeReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateOnlineRechargeReqValidationError{}
+
 // Validate checks the field values on FundAccount with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -767,3 +944,450 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BalanceValidationError{}
+
+// Validate checks the field values on OnlineRecharge with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *OnlineRecharge) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OnlineRecharge with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in OnlineRechargeMultiError,
+// or nil if none found.
+func (m *OnlineRecharge) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OnlineRecharge) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for OutPaymentId
+
+	// no validation rules for FundAccountId
+
+	// no validation rules for FundBalanceId
+
+	// no validation rules for UserId
+
+	// no validation rules for BizType
+
+	// no validation rules for Amount
+
+	// no validation rules for Currency
+
+	// no validation rules for Channel
+
+	// no validation rules for Status
+
+	// no validation rules for PaymentStatus
+
+	// no validation rules for ChannelOrderId
+
+	// no validation rules for ChannelTradeId
+
+	// no validation rules for ChannelRetCode
+
+	// no validation rules for ChannelRetMsg
+
+	// no validation rules for SourceOperator
+
+	// no validation rules for Metadata
+
+	// no validation rules for CompletedTime
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for PaymentAmount
+
+	// no validation rules for PaymentUrl
+
+	// no validation rules for SysRetCode
+
+	// no validation rules for SysRetMsg
+
+	// no validation rules for NetAmount
+
+	// no validation rules for PaymentFee
+
+	// no validation rules for RechargeAmount
+
+	if len(errors) > 0 {
+		return OnlineRechargeMultiError(errors)
+	}
+
+	return nil
+}
+
+// OnlineRechargeMultiError is an error wrapping multiple validation errors
+// returned by OnlineRecharge.ValidateAll() if the designated constraints
+// aren't met.
+type OnlineRechargeMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OnlineRechargeMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OnlineRechargeMultiError) AllErrors() []error { return m }
+
+// OnlineRechargeValidationError is the validation error returned by
+// OnlineRecharge.Validate if the designated constraints aren't met.
+type OnlineRechargeValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OnlineRechargeValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OnlineRechargeValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OnlineRechargeValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OnlineRechargeValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OnlineRechargeValidationError) ErrorName() string { return "OnlineRechargeValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OnlineRechargeValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOnlineRecharge.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OnlineRechargeValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OnlineRechargeValidationError{}
+
+// Validate checks the field values on CreateDebitReq with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CreateDebitReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateDebitReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CreateDebitReqMultiError,
+// or nil if none found.
+func (m *CreateDebitReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateDebitReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetRequestId()) < 1 {
+		err := CreateDebitReqValidationError{
+			field:  "RequestId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for UserId
+
+	// no validation rules for BizType
+
+	// no validation rules for FundBalanceId
+
+	if utf8.RuneCountInString(m.GetBizNo()) < 1 {
+		err := CreateDebitReqValidationError{
+			field:  "BizNo",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetDebitType()) < 1 {
+		err := CreateDebitReqValidationError{
+			field:  "DebitType",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetAmount()) < 1 {
+		err := CreateDebitReqValidationError{
+			field:  "Amount",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetCurrency()) != 3 {
+		err := CreateDebitReqValidationError{
+			field:  "Currency",
+			reason: "value length must be 3 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	// no validation rules for ExpireMinutes
+
+	if utf8.RuneCountInString(m.GetSourceOperator()) < 1 {
+		err := CreateDebitReqValidationError{
+			field:  "SourceOperator",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Summary
+
+	// no validation rules for Metadata
+
+	if len(errors) > 0 {
+		return CreateDebitReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateDebitReqMultiError is an error wrapping multiple validation errors
+// returned by CreateDebitReq.ValidateAll() if the designated constraints
+// aren't met.
+type CreateDebitReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateDebitReqMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateDebitReqMultiError) AllErrors() []error { return m }
+
+// CreateDebitReqValidationError is the validation error returned by
+// CreateDebitReq.Validate if the designated constraints aren't met.
+type CreateDebitReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateDebitReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateDebitReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateDebitReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateDebitReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateDebitReqValidationError) ErrorName() string { return "CreateDebitReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CreateDebitReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateDebitReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateDebitReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateDebitReqValidationError{}
+
+// Validate checks the field values on CreateDebitResp with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CreateDebitResp) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateDebitResp with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateDebitRespMultiError, or nil if none found.
+func (m *CreateDebitResp) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateDebitResp) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TxNo
+
+	// no validation rules for FundBalanceId
+
+	// no validation rules for Status
+
+	// no validation rules for Amount
+
+	// no validation rules for Currency
+
+	// no validation rules for FailReason
+
+	// no validation rules for RequestId
+
+	// no validation rules for BizNo
+
+	if len(errors) > 0 {
+		return CreateDebitRespMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateDebitRespMultiError is an error wrapping multiple validation errors
+// returned by CreateDebitResp.ValidateAll() if the designated constraints
+// aren't met.
+type CreateDebitRespMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateDebitRespMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateDebitRespMultiError) AllErrors() []error { return m }
+
+// CreateDebitRespValidationError is the validation error returned by
+// CreateDebitResp.Validate if the designated constraints aren't met.
+type CreateDebitRespValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateDebitRespValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateDebitRespValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateDebitRespValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateDebitRespValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateDebitRespValidationError) ErrorName() string { return "CreateDebitRespValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CreateDebitRespValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateDebitResp.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateDebitRespValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateDebitRespValidationError{}

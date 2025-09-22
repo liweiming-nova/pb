@@ -119,7 +119,9 @@ var ChannelProxyService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	FundHubService_CreateAccount_FullMethodName = "/fund.FundHubService/CreateAccount"
+	FundHubService_CreateAccount_FullMethodName        = "/fund.FundHubService/CreateAccount"
+	FundHubService_CreateOnlineRecharge_FullMethodName = "/fund.FundHubService/CreateOnlineRecharge"
+	FundHubService_CreateDebit_FullMethodName          = "/fund.FundHubService/CreateDebit"
 )
 
 // FundHubServiceClient is the client API for FundHubService service.
@@ -128,6 +130,10 @@ const (
 type FundHubServiceClient interface {
 	// 创建资金账户
 	CreateAccount(ctx context.Context, in *CreateAccountReq, opts ...grpc.CallOption) (*CreateAccountResp, error)
+	// CreateOnlineRecharge 创建在线充值
+	CreateOnlineRecharge(ctx context.Context, in *CreateOnlineRechargeReq, opts ...grpc.CallOption) (*OnlineRecharge, error)
+	// CreateDebit 创建扣款
+	CreateDebit(ctx context.Context, in *CreateDebitReq, opts ...grpc.CallOption) (*CreateDebitResp, error)
 }
 
 type fundHubServiceClient struct {
@@ -148,12 +154,36 @@ func (c *fundHubServiceClient) CreateAccount(ctx context.Context, in *CreateAcco
 	return out, nil
 }
 
+func (c *fundHubServiceClient) CreateOnlineRecharge(ctx context.Context, in *CreateOnlineRechargeReq, opts ...grpc.CallOption) (*OnlineRecharge, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OnlineRecharge)
+	err := c.cc.Invoke(ctx, FundHubService_CreateOnlineRecharge_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fundHubServiceClient) CreateDebit(ctx context.Context, in *CreateDebitReq, opts ...grpc.CallOption) (*CreateDebitResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateDebitResp)
+	err := c.cc.Invoke(ctx, FundHubService_CreateDebit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FundHubServiceServer is the server API for FundHubService service.
 // All implementations should embed UnimplementedFundHubServiceServer
 // for forward compatibility.
 type FundHubServiceServer interface {
 	// 创建资金账户
 	CreateAccount(context.Context, *CreateAccountReq) (*CreateAccountResp, error)
+	// CreateOnlineRecharge 创建在线充值
+	CreateOnlineRecharge(context.Context, *CreateOnlineRechargeReq) (*OnlineRecharge, error)
+	// CreateDebit 创建扣款
+	CreateDebit(context.Context, *CreateDebitReq) (*CreateDebitResp, error)
 }
 
 // UnimplementedFundHubServiceServer should be embedded to have
@@ -165,6 +195,12 @@ type UnimplementedFundHubServiceServer struct{}
 
 func (UnimplementedFundHubServiceServer) CreateAccount(context.Context, *CreateAccountReq) (*CreateAccountResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (UnimplementedFundHubServiceServer) CreateOnlineRecharge(context.Context, *CreateOnlineRechargeReq) (*OnlineRecharge, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOnlineRecharge not implemented")
+}
+func (UnimplementedFundHubServiceServer) CreateDebit(context.Context, *CreateDebitReq) (*CreateDebitResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDebit not implemented")
 }
 func (UnimplementedFundHubServiceServer) testEmbeddedByValue() {}
 
@@ -204,6 +240,42 @@ func _FundHubService_CreateAccount_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FundHubService_CreateOnlineRecharge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOnlineRechargeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FundHubServiceServer).CreateOnlineRecharge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FundHubService_CreateOnlineRecharge_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FundHubServiceServer).CreateOnlineRecharge(ctx, req.(*CreateOnlineRechargeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FundHubService_CreateDebit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDebitReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FundHubServiceServer).CreateDebit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FundHubService_CreateDebit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FundHubServiceServer).CreateDebit(ctx, req.(*CreateDebitReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FundHubService_ServiceDesc is the grpc.ServiceDesc for FundHubService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -214,6 +286,14 @@ var FundHubService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateAccount",
 			Handler:    _FundHubService_CreateAccount_Handler,
+		},
+		{
+			MethodName: "CreateOnlineRecharge",
+			Handler:    _FundHubService_CreateOnlineRecharge_Handler,
+		},
+		{
+			MethodName: "CreateDebit",
+			Handler:    _FundHubService_CreateDebit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

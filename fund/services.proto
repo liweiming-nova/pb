@@ -13,4 +13,8 @@ service ChannelProxyService {
 service FundHubService {
   // 创建资金账户
   rpc CreateAccount(fund.CreateAccountReq)  returns (fund.CreateAccountResp){}
+  // CreateOnlineRecharge 创建在线充值
+  rpc CreateOnlineRecharge(fund.CreateOnlineRechargeReq) returns (fund.OnlineRecharge) {}
+  // CreateDebit 创建扣款
+  rpc CreateDebit(fund.CreateDebitReq) returns (fund.CreateDebitResp) {}
 }

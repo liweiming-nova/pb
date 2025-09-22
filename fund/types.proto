@@ -29,6 +29,37 @@ message CreateAccountResp {
   repeated Balance balances = 4;
 }
 
+// CreateOnlineRechargeReq 创建在线充值请求
+message CreateOnlineRechargeReq {
+  uint64 user_id = 1;
+  string fund_balance_id = 2;
+  string request_id = 3  [(validate.rules).string.min_len = 1];
+  string amount = 4 [(validate.rules).string.min_len = 1]; // 充值金额
+  string currency = 5 [(validate.rules).string.len = 3]; // 货币类型
+  string recharge_channel = 6 [(validate.rules).string.min_len = 1];   // 充值渠道
+  string return_url = 7 [(validate.rules).string.min_len = 1]; // 支付完成跳转URL
+  string source_operator = 8 [(validate.rules).string.min_len = 1];
+  string metadata = 9; // 元数据
+  string biz_type = 10; // 业务类型
+}
+
+// CreateOfflineRechargeReq 创建离线充值审核请求
+/*
+message CreateOfflineRechargeReq {
+  string request_id = 1 [(validate.rules).string.min_len = 1]; // 请求ID
+  uint64 user_id = 2;       // 商户ID
+  string biz_type = 3; // 业务类型
+  string transfer_no = 4 [(validate.rules).string.min_len = 1]; // 转账单号
+  string transfer_channel = 5 [(validate.rules).string.min_len = 1]; // 转账渠道
+  repeated string voucher_urls = 6 [(validate.rules).repeated = {min_items: 1, max_items: 50}]; // 转账凭证URL
+  string source_operator = 7 [(validate.rules).string.min_len = 1];
+  string submit_remark = 8;
+  string fund_balance_id = 9; // 资金账户ID
+  string proxy_fs_user_id = 10; // 代理飞书用户ID
+}
+*/
+
+
 message FundAccount {
   string fund_account_id = 1;
   string user_name = 2;
@@ -37,7 +68,6 @@ message FundAccount {
   uint64 user_id = 5;
   string status = 6;
 }
-
 
 
 // Balance 余额
@@ -53,5 +83,65 @@ message Balance {
   string status = 9;
   string created_at = 10;
   FundAccount fund_account = 11;
+}
+
+// OnlineRecharge 在线充值
+message OnlineRecharge {
+  int64  id = 1;
+  string out_payment_id = 2;
+  string fund_account_id = 3;
+  string fund_balance_id = 4;
+  uint64 user_id = 5;
+  string biz_type = 6;
+  string amount = 7;
+  string currency = 8;
+  string channel = 9;
+  string status = 10;
+  string payment_status = 11;
+  string channel_order_id = 12;
+  string channel_trade_id = 13;
+  string channel_ret_code = 14;
+  string channel_ret_msg = 15;
+  string source_operator = 16;
+  string metadata = 17;
+  string completed_time = 18;
+  string created_at = 19;
+  string payment_amount = 20;
+  string payment_url = 21;
+  string sys_ret_code = 22;
+  string sys_ret_msg = 23;
+  string net_amount = 24;
+  string payment_fee = 25;
+  string recharge_amount = 26;
+}
+
+
+
+// CreateDebitReq 预扣请求
+message CreateDebitReq {
+  string request_id = 1 [(validate.rules).string.min_len = 1];
+  uint64 user_id = 2;
+  string biz_type = 3;
+  string fund_balance_id = 4;
+  string biz_no = 5 [(validate.rules).string.min_len = 1];
+  string debit_type = 6 [(validate.rules).string.min_len = 1];
+  string amount = 7 [(validate.rules).string.min_len = 1];
+  string currency = 8 [(validate.rules).string.len = 3];
+  uint64 expire_minutes = 9;
+  string source_operator = 10 [(validate.rules).string.min_len = 1];
+  string summary = 11;
+  string metadata = 12;
+}
+
+// CreateDebitResp 预扣响应
+message CreateDebitResp {
+  string tx_no = 1;
+  string fund_balance_id = 2;
+  string status = 3;
+  string amount = 4;
+  string currency = 5;
+  string fail_reason = 6;
+  string request_id = 7;
+  string biz_no = 8;
 }
 
