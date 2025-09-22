@@ -24,13 +24,14 @@ const (
 
 type User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                // 用户id
-	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`                             // 用户名称
-	Status        int32                  `protobuf:"varint,22,opt,name=status,proto3" json:"status"`                       // 状态
-	Email         string                 `protobuf:"bytes,23,opt,name=email,proto3" json:"email"`                          // 邮箱
-	Phone         string                 `protobuf:"bytes,24,opt,name=phone,proto3" json:"phone"`                          // 手机号
-	CreatedAt     string                 `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at"` // 创建时间
-	UpdatedAt     string                 `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` // 更新时间
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                               // 用户id
+	OpenId        string                 `protobuf:"bytes,2,opt,name=open_id,json=openId,proto3" json:"open_id"`          // 可见的id
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                            // 用户名称
+	Status        int32                  `protobuf:"varint,4,opt,name=status,proto3" json:"status"`                       // 状态
+	Email         string                 `protobuf:"bytes,5,opt,name=email,proto3" json:"email"`                          // 邮箱
+	Phone         string                 `protobuf:"bytes,6,opt,name=phone,proto3" json:"phone"`                          // 手机号
+	CreatedAt     string                 `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"` // 创建时间
+	UpdatedAt     string                 `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` // 更新时间
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -70,6 +71,13 @@ func (x *User) GetId() uint64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *User) GetOpenId() string {
+	if x != nil {
+		return x.OpenId
+	}
+	return ""
 }
 
 func (x *User) GetName() string {
@@ -206,17 +214,18 @@ var File_user_types_proto protoreflect.FileDescriptor
 
 const file_user_types_proto_rawDesc = "" +
 	"\n" +
-	"\x10user/types.proto\x12\x04user\x1a#third_party/validate/validate.proto\"\xac\x01\n" +
+	"\x10user/types.proto\x12\x04user\x1a#third_party/validate/validate.proto\"\xc5\x01\n" +
 	"\x04User\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12\x16\n" +
-	"\x06status\x18\x16 \x01(\x05R\x06status\x12\x14\n" +
-	"\x05email\x18\x17 \x01(\tR\x05email\x12\x14\n" +
-	"\x05phone\x18\x18 \x01(\tR\x05phone\x12\x1d\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
+	"\aopen_id\x18\x02 \x01(\tR\x06openId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\x05R\x06status\x12\x14\n" +
+	"\x05email\x18\x05 \x01(\tR\x05email\x12\x14\n" +
+	"\x05phone\x18\x06 \x01(\tR\x05phone\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x14 \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\a \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x15 \x01(\tR\tupdatedAt\"\x1c\n" +
+	"updated_at\x18\b \x01(\tR\tupdatedAt\"\x1c\n" +
 	"\n" +
 	"GetUserReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"-\n" +
