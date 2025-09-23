@@ -140,6 +140,7 @@ message CreateDebitReq {
 message CreateDebitResp {
   string tx_no = 1;
   uint64 fund_balance_id = 2;
+  string fund_balance_no = 9;
   string status = 3;
   string amount = 4;
   string currency = 5;
