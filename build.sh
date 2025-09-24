@@ -5,8 +5,16 @@ rm -rf gen-go
 mkdir -p gen-go
 
 echo "begin to generate code with buf..."
+# 临时重命名 third_party/google 避免与 Buf 内置模块冲突，但保留 validate
+if [ -d "third_party/google" ]; then
+    mv third_party/google third_party/google_backup
+fi
 buf dep update
 buf generate
+# 恢复 third_party/google 目录
+if [ -d "third_party/google_backup" ]; then
+    mv third_party/google_backup third_party/google
+fi
 if [ $? -ne 0 ]; then
     echo "gen failed"
     exit 1

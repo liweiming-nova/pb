@@ -7,4 +7,7 @@ import "user/types.proto";
 
 service UserServer {
   rpc GetUser(user.GetUserReq) returns(user.GetUserResp){}
+  rpc CreateUser(user.CreateUserReq) returns(user.User){}
+  rpc PasswordAuth(user.PasswordAuthReq) returns(user.AuthResp){}
+  rpc CodeAuth(user.CodeAuthReq) returns(user.AuthResp){}
 }

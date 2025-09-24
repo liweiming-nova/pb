@@ -1,0 +1,85 @@
+syntax = "proto3";
+package email;
+option go_package = "github.com/liweiming-nova/pb/gen-go/email";
+
+import "third_party/validate/validate.proto";
+
+message SendEmailReq {
+  string from = 1 [
+    (validate.rules).string = {
+      email: true  // 校验是否为合法邮箱格式（可选字段，允许为空）
+    }
+  ];
+
+  repeated string to = 2 [
+    (validate.rules).repeated = {
+      min_items: 1,  // 至少一个收件人
+      items {
+        string {
+          email: true,  // 每个收件人必须是合法邮箱
+          min_len: 1    // 非空
+        }
+      }
+    }
+  ];
+
+  repeated string cc = 3 [
+    (validate.rules).repeated = {
+      items {
+        string {
+          email: true
+        }
+      }
+    }
+  ];
+
+  repeated string bcc = 4 [
+    (validate.rules).repeated = {
+      items {
+        string {
+          email: true
+        }
+      }
+    }
+  ];
+
+  string subject = 5 [
+    (validate.rules).string = {
+      min_len: 1,
+      max_len: 256,
+    }
+  ];
+
+  string body_text = 6 [
+    (validate.rules).string = {
+      max_len: 10000  // 限制纯文本长度
+    }
+  ];
+
+  string body_html = 7 [
+    (validate.rules).string = {
+      max_len: 50000  // 限制HTML长度
+    }
+  ];
+
+  map<string, string> headers = 9;
+
+  string template_id = 10 [
+    (validate.rules).string = {
+      max_len: 128
+    }
+  ];
+
+  map<string, string> template_params = 11;
+}
+
+message SendEmailResp {
+  bool success = 1;
+  string message = 2;
+  string message_id = 3 [
+    (validate.rules).string = {
+      min_len: 1
+    }
+  ];
+  int64 send_time = 4;
+}

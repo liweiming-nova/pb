@@ -1,0 +1,11 @@
+syntax = "proto3";
+package email;
+option go_package = "github.com/liweiming-nova/pb/gen-go/email";
+import "third_party/validate/validate.proto";
+
+
+import "email/types.proto";
+
+service EmailService {
+  rpc SendEmail (email.SendEmailReq) returns (email.SendEmailResp){}
+}

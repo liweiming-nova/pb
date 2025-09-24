@@ -24,3 +24,30 @@ message GetUserReq {
 message GetUserResp {
   User user = 1;
 }
+
+message CreateUserReq {
+  string email = 1;     // 邮箱
+  string password = 2; // 密码
+  string code  = 3; // 验证码
+}
+
+message PasswordAuthReq {
+  string email = 1;     // 邮箱
+  string password = 2; // 密码
+}
+
+message CodeAuthReq {
+  string email = 1; // 邮箱
+  string code = 2; // 密码
+}
+
+message AuthResp {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 access_token_expired = 3;
+  int64 refresh_token_expired = 4;
+}
+
+message UpdateUserReq{
+  int64 user_id  = 1;
+}

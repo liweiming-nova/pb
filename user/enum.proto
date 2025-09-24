@@ -4,9 +4,7 @@ option go_package = "github.com/liweiming-nova/pb/gen-go/user";
 import "third_party/validate/validate.proto";
 
 
-enum Status {
-  StatusDisabledNIl = 0;
-  StatusDisabled = 1; //停用
-  StatusEnabled = 2; //启用
-  StatusForbidden = 3; // 禁用
+enum UserStatus {
+  UserStatusDisabled = 0; // 禁用
+  UserStatusNormal = 1; // 正常
 }
