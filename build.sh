@@ -1,33 +1,41 @@
 #!/bin/bash
+#########################################################################
+# Author: (zhengfei@bestfulfill.com)
+# Created Time: 2020-07-22 10:48:39
+# File Name: build.sh
+# Description:
+#########################################################################
 
-echo "rm gen-go..."
-rm -rf gen-go
+echo "rm gen-go gen-java..."
+rm -rf gen-go #gen-java/src
 mkdir -p gen-go
+#mkdir -p gen-java/src/main/java
 
-echo "begin to generate code with buf..."
-# 临时重命名 third_party/google 避免与 Buf 内置模块冲突，但保留 validate
-if [ -d "third_party/google" ]; then
-    mv third_party/google third_party/google_backup
-fi
-buf dep update
-buf generate
-# 恢复 third_party/google 目录
-if [ -d "third_party/google_backup" ]; then
-    mv third_party/google_backup third_party/google
-fi
-if [ $? -ne 0 ]; then
+echo "begin to generate code ..."
+
+find . -type f -name '*.proto' | xargs -n 1 protoc \
+	-I=. \
+	-I=./third_party \
+	--go_out=paths=source_relative:./gen-go \
+	--go-grpc_out=paths=source_relative,require_unimplemented_servers=false:./gen-go \
+	--validate_out=paths=source_relative,lang=go:./gen-go \
+	#--java_out=:./gen-java/src/main/java \
+	#--grpc-java_out=:./gen-java/src/main/java
+if [ $? -ne 0 ]
+then
     echo "gen failed"
-    exit 1
+    exit -1
 fi
 
-# ========== 保留你的后处理逻辑 ==========
-for f in $(find gen-go -type f -name '*.pb.go'); do
-    if [ "$(uname)" == "Darwin" ]; then # Mac
-        sed -e 's/,omitempty"/"/g' -i '' "$f"
+for f in `find gen-go -type f -name '*.pb.go'`; do
+    if [ `uname` == "Darwin" ]; then # Mac
+        sed -e 's/,omitempty"/"/g' -i '' $f;
     else # Linux
-        sed -e 's/,omitempty"/"/g' -i "$f"
-    fi
-    protoc-go-inject-tag -input "$f"
+        sed -e 's/,omitempty"/"/g' -i $f;
+    fi;
+    protoc-go-inject-tag -input $f;
 done
 
-echo "done."
+echo done.
+
+# vim: set noexpandtab ts=4 sts=4 sw=4 :
